@@ -1,8 +1,13 @@
 class Whiteboard
-  attr_accessor :contents
+  attr_accessor :contents, :erase
 
-  def initialize(contents = [])
+  def initialize(contents = [], erase = [])
     @contents = contents
+    @erase = erase
+  end
+
+  def erase=(new_board)
+    @erase
   end
 end
 
@@ -15,13 +20,17 @@ class DryEraseMarker
 
   INK_USE_PER_CHARACTER = 0.01
   def write(contents, whiteboard)
-    @capacity = @capacity - (INK_USE_PER_CHARACTER * contents.length)
-    whiteboard.contents << contents
+    if @capacity >= 0.01
+      @capacity = @capacity - (INK_USE_PER_CHARACTER * contents.length)
+      whiteboard.contents << contents
+    else
+      return false
+    end
   end
 end
 
 whiteboard = Whiteboard.new
 black_marker = DryEraseMarker.new('black')
 
-black_marker.write('Hello Launchers', whiteboard)
-black_marker.write('My name is Slim Shady', whiteboard)
+puts black_marker.write('Hello Launchers', whiteboard)
+puts black_marker.write('My name is Slim Shady', whiteboard)
