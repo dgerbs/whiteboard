@@ -1,7 +1,7 @@
 class Whiteboard
   attr_accessor :contents, :erase
 
-  def initialize(contents = [], erase = [])
+  def initialize(contents = [])
     @contents = contents
     @erase = erase
   end
@@ -34,3 +34,6 @@ black_marker = DryEraseMarker.new('black')
 
 puts black_marker.write('Hello Launchers', whiteboard)
 puts black_marker.write('My name is Slim Shady', whiteboard)
+
+# puts black_marker.inspect
+# puts whiteboard.inspect
